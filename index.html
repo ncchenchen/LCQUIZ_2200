@@ -13,7 +13,7 @@
       font-family: 'Noto Sans TC', sans-serif;
       background-color: #F8F5F0;
       color: #333;
-      background-image: url('background.jpeg');
+      background-image: url('https://i.imgur.com/L6okdBS.jpeg'); /* ✅ 這是你提供的照片 CDN */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -44,7 +44,6 @@
       padding: 24px;
       box-sizing: border-box;
       height: auto !important;
-      min-height: unset;
     }
     .question-text {
       font-weight: 600;
@@ -61,8 +60,6 @@
       cursor: pointer;
       transition: all 0.2s ease;
       overflow-wrap: break-word;
-      white-space: normal;
-      word-wrap: break-word;
     }
     .option:hover {
       background-color: #e4efe8;
@@ -118,7 +115,6 @@
         margin: 24px 16px 80px;
         padding: 20px;
         height: auto !important;
-        min-height: unset;
       }
       .question-text {
         font-size: 16px;
@@ -135,14 +131,18 @@
     <img src="logo.png" alt="La Chambre Logo">
     <h1>天然精油心理測驗</h1>
   </header>
+
   <div class="card" id="quizCard">
     <div class="progress" id="progressText">第 1 / 10 題</div>
     <div class="question-text" id="questionText"></div>
     <div id="options"></div>
     <button id="nextBtn" onclick="nextQuestion()">下一題</button>
   </div>
+
   <div id="result"></div>
+
   <footer>© La Chambre 香氛實驗室｜以氣味療癒生活每一刻</footer>
+
   <script>
     const questions = [
       "當你感到壓力大時，你最渴望哪種療癒方式？",
@@ -270,7 +270,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // 初始顯示
     showQuestion(current);
   </script>
 </body>
