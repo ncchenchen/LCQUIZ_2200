@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Chambre 精油心理測驗</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans TC', sans-serif;
+      background-color: #F8F5F0;
+      color: #333;
+      background-image: url('background.jpeg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 24px 16px 10px;
+    }
+    header img {
+      width: 90px;
+      margin-bottom: 12px;
+    }
+    h1 {
+      font-size: 20px;
+      color: #333;
+      margin: 0;
+    }
+    .card {
+      max-width: 600px;
+      margin: 40px auto 60px;
+      background-color: #ffffffcc;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      padding: 24px;
+      box-sizing: border-box;
+      height: auto !important;
+      min-height: unset;
+    }
+    .question-text {
+      font-weight: 600;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .option {
+      display: block;
+      background-color: #F8F5F0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      border: 1px solid #ddd;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      overflow-wrap: break-word;
+      white-space: normal;
+      word-wrap: break-word;
+    }
+    .option:hover {
+      background-color: #e4efe8;
+    }
+    .option input {
+      margin-right: 8px;
+    }
+    .progress {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 12px;
+      color: #666;
+    }
+    #nextBtn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #A8D5BA;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+    #nextBtn:hover {
+      background-color: #8fc2a7;
+    }
+    #result {
+      max-width: 600px;
+      margin: 40px auto 80px;
+      background-color: #ffffffee;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    #result h2 {
+      font-size: 20px;
+      margin-bottom: 16px;
+    }
+    #result ul {
+      padding-left: 20px;
+    }
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #888;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    @media (max-width: 600px) {
+      .card, #result {
+        margin: 24px 16px 80px;
+        padding: 20px;
+        height: auto !important;
+        min-height: unset;
+      }
+      .question-text {
+        font-size: 16px;
+      }
+      #nextBtn {
+        font-size: 15px;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="La Chambre Logo">
+    <h1>天然精油心理測驗</h1>
+  </header>
+  <div class="card" id="quizCard">
+    <div class="progress" id="progressText">第 1 / 10 題</div>
+    <div class="question-text" id="questionText"></div>
+    <div id="options"></div>
+    <button id="nextBtn" onclick="nextQuestion()">下一題</button>
+  </div>
+  <div id="result"></div>
+  <footer>© La Chambre 香氛實驗室｜以氣味療癒生活每一刻</footer>
+  <script>
+    const questions = [
+      "當你感到壓力大時，你最渴望哪種療癒方式？",
+      "清晨醒來，你希望迎接一天的方式是？",
+      "如果能抽空放鬆一下，你最嚮往哪種環境？",
+      "獨處時，你偏愛哪種療癒儀式？",
+      "最近的你，內心更貼近以下哪種狀態？",
+      "如果可以為生活注入一種能量，你希望是？",
+      "好友眼中的你，更像是哪種自然氣息？",
+      "當生活失衡時，你會透過什麼找回自己？",
+      "在你理想的放鬆空間中，一定會有：",
+      "你最重視培養內心的哪種品質？"
+    ];
+
+    const options = [
+      ["安靜地與自己獨處", "主動找朋友聊聊", "透過呼吸與放鬆活動紓壓", "到戶外轉換空間", "寫字或創作表達自己"],
+      ["緩慢展開新的一天", "充滿期待地出門活動", "給自己清楚的目標與節奏", "專注當下並留點空白", "享受靜靜不被打擾的時光"],
+      ["在自然中感受和諧與安定", "在開闊空間中感受自由與愉悅", "待在熟悉角落做自己喜歡的事", "安靜環境中獨自沈澱思緒", "探索一個陌生但有趣的地方"],
+      ["點蠟燭泡澡並深呼吸", "聽音樂或跳舞釋放情緒", "喝杯熱茶或躺下休息", "寫日記整理心情", "什麼都不做只靜靜發呆"],
+      ["覺得自己需要更多愛與接納", "覺得自己需要行動力", "覺得自己需要好好休息", "覺得自己需要安定安全感", "覺得自己需要靈感和自由"],
+      ["愛與溫柔的感受", "陽光與喜悅的能量", "清晰與覺察的狀態", "穩定踏實的內在", "自由探索與創造的空間"],
+      ["總能包容照顧他人情緒", "讓人感覺溫暖好相處", "很有原則但平和", "沉穩可靠可信賴", "活潑外向充滿點子"],
+      ["一點空間與自己的儀式感", "來自外界的互動與肯定", "好好打掃收納或安排生活感", "靜坐冥想或親近自然", "換個環境或開啟新挑戰"],
+      ["明亮柔和的光線與舒適布料", "空間中的動線與活潑感", "簡單乾淨不複雜的擺設", "大量自然元素或木頭材質", "有些神秘感與獨特氛圍"],
+      ["溫柔對待他人與自己", "總能保持樂觀", "有能力整理混亂", "越是困難越沉得住氣", "勇敢開創、敢於冒險"]
+    ];
+
+    const valueMap = ["A", "B", "C", "D", "E"];
+    const oilMapping = {
+      A: ["玫瑰", "薰衣草", "茉莉", "橙花", "天竺葵", "依蘭"],
+      B: ["甜橙", "佛手柑", "白葡萄柚", "苦橙", "萊姆", "紅橘"],
+      C: ["茶樹", "迷迭香", "鼠尾草", "洋甘菊", "歐薄荷", "綠花白千層"],
+      D: ["檀香", "雪松", "絲柏", "岩蘭草", "檜木", "花梨木"],
+      E: ["廣藿香", "安息香", "馬鞭草", "百里香", "肉荳蔻", "丁香"]
+    };
+
+    const oilDescriptions = {
+      "玫瑰": "溫柔、療癒情緒與心靈的力量。",
+      "薰衣草": "放鬆神經、助眠的經典選擇。",
+      "茉莉": "增強自信與女性能量。",
+      "橙花": "舒緩焦慮、帶來安心感。",
+      "天竺葵": "平衡情緒與荷爾蒙。",
+      "依蘭": "釋放情感、增加愉悅感。",
+      "甜橙": "陽光般的歡樂能量。",
+      "佛手柑": "愉悅提振心情。",
+      "白葡萄柚": "清爽提神、激勵人心。",
+      "苦橙": "安撫焦慮與煩躁。",
+      "萊姆": "活力滿點，清新有勁。",
+      "紅橘": "提升樂觀情緒與正能量。",
+      "茶樹": "清新淨化、防護力強。",
+      "迷迭香": "提神醒腦、促進記憶力。",
+      "鼠尾草": "淨化空間與思緒。",
+      "洋甘菊": "溫和鎮定、舒緩壓力。",
+      "歐薄荷": "清新涼感、幫助集中。",
+      "綠花白千層": "強化呼吸與清新感。",
+      "檀香": "沉穩靜心、促進冥想。",
+      "雪松": "穩定、根植、安全感。",
+      "絲柏": "提升呼吸與穩定感。",
+      "岩蘭草": "穩定情緒、接地氣。",
+      "檜木": "淨化空間、帶來寧靜力量。",
+      "花梨木": "柔和木香，撫慰情緒。",
+      "廣藿香": "深層安定、消除焦慮。",
+      "安息香": "溫潤甜感，撫慰心靈。",
+      "馬鞭草": "激勵士氣、清理負能量。",
+      "百里香": "強化意志與行動力。",
+      "肉荳蔻": "溫暖提神、改善倦怠。",
+      "丁香": "香甜辛辣，喚醒創造能量。"
+    };
+
+    let current = 0;
+    const selections = [];
+
+    const questionText = document.getElementById("questionText");
+    const optionsDiv = document.getElementById("options");
+    const progressText = document.getElementById("progressText");
+    const resultDiv = document.getElementById("result");
+    const card = document.getElementById("quizCard");
+
+    function showQuestion(index) {
+      questionText.innerText = questions[index];
+      progressText.innerText = `第 ${index + 1} / ${questions.length} 題`;
+      optionsDiv.innerHTML = "";
+      options[index].forEach((opt, i) => {
+        const value = valueMap[i];
+        const label = document.createElement("label");
+        label.className = "option";
+        label.innerHTML = `<input type="radio" name="q" value="${value}"> ${opt}`;
+        optionsDiv.appendChild(label);
+      });
+    }
+
+    function nextQuestion() {
+      const selected = document.querySelector('input[name="q"]:checked');
+      if (!selected) {
+        alert("請選擇一個選項");
+        return;
+      }
+      selections.push(selected.value);
+      current++;
+      if (current < questions.length) {
+        showQuestion(current);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      card.style.display = "none";
+      const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
+      selections.forEach(val => counts[val]++);
+      const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
+      let finalOils = [];
+      sorted.forEach(([key]) => finalOils.push(...oilMapping[key].slice(0, 2)));
+      const uniqueOils = [...new Set(finalOils)].slice(0, 6);
+      const descriptions = uniqueOils.map(oil => `<li><strong>${oil}</strong>：${oilDescriptions[oil]}</li>`).join("");
+
+      resultDiv.innerHTML = `
+        <div class="card">
+          <h2>你的專屬香氣組合</h2>
+          <ul>${descriptions}</ul>
+          <p style="margin-top:16px">願這些氣味成為你生活的陪伴，讓每一次呼吸都更靠近真實的自己。</p>
+        </div>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // 初始顯示
+    showQuestion(current);
+  </script>
+</body>
+</html>
