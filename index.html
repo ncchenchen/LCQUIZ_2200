@@ -13,7 +13,7 @@
       font-family: 'Noto Sans TC', sans-serif;
       background-color: #F8F5F0;
       color: #333;
-      background-image: url('https://i.imgur.com/L6okdBS.jpeg'); /* ✅ 這是你提供的照片 CDN */
+      background-image: url('https://raw.githubusercontent.com/ncchenchen/LCQUIZ_2200/main/background.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -43,7 +43,6 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       padding: 24px;
       box-sizing: border-box;
-      height: auto !important;
     }
     .question-text {
       font-weight: 600;
@@ -51,7 +50,6 @@
       margin-bottom: 16px;
     }
     .option {
-      display: block;
       background-color: #F8F5F0;
       border-radius: 12px;
       padding: 12px 16px;
@@ -112,9 +110,8 @@
     }
     @media (max-width: 600px) {
       .card, #result {
-        margin: 24px 16px 80px;
+        margin: 24px 16px 40px;
         padding: 20px;
-        height: auto !important;
       }
       .question-text {
         font-size: 16px;
@@ -131,18 +128,14 @@
     <img src="logo.png" alt="La Chambre Logo">
     <h1>天然精油心理測驗</h1>
   </header>
-
   <div class="card" id="quizCard">
     <div class="progress" id="progressText">第 1 / 10 題</div>
     <div class="question-text" id="questionText"></div>
     <div id="options"></div>
     <button id="nextBtn" onclick="nextQuestion()">下一題</button>
   </div>
-
   <div id="result"></div>
-
   <footer>© La Chambre 香氛實驗室｜以氣味療癒生活每一刻</footer>
-
   <script>
     const questions = [
       "當你感到壓力大時，你最渴望哪種療癒方式？",
@@ -156,7 +149,6 @@
       "在你理想的放鬆空間中，一定會有：",
       "你最重視培養內心的哪種品質？"
     ];
-
     const options = [
       ["安靜地與自己獨處", "主動找朋友聊聊", "透過呼吸與放鬆活動紓壓", "到戶外轉換空間", "寫字或創作表達自己"],
       ["緩慢展開新的一天", "充滿期待地出門活動", "給自己清楚的目標與節奏", "專注當下並留點空白", "享受靜靜不被打擾的時光"],
@@ -169,7 +161,6 @@
       ["明亮柔和的光線與舒適布料", "空間中的動線與活潑感", "簡單乾淨不複雜的擺設", "大量自然元素或木頭材質", "有些神秘感與獨特氛圍"],
       ["溫柔對待他人與自己", "總能保持樂觀", "有能力整理混亂", "越是困難越沉得住氣", "勇敢開創、敢於冒險"]
     ];
-
     const valueMap = ["A", "B", "C", "D", "E"];
     const oilMapping = {
       A: ["玫瑰", "薰衣草", "茉莉", "橙花", "天竺葵", "依蘭"],
@@ -178,7 +169,6 @@
       D: ["檀香", "雪松", "絲柏", "岩蘭草", "檜木", "花梨木"],
       E: ["廣藿香", "安息香", "馬鞭草", "百里香", "肉荳蔻", "丁香"]
     };
-
     const oilDescriptions = {
       "玫瑰": "溫柔、療癒情緒與心靈的力量。",
       "薰衣草": "放鬆神經、助眠的經典選擇。",
@@ -211,16 +201,13 @@
       "肉荳蔻": "溫暖提神、改善倦怠。",
       "丁香": "香甜辛辣，喚醒創造能量。"
     };
-
     let current = 0;
     const selections = [];
-
     const questionText = document.getElementById("questionText");
     const optionsDiv = document.getElementById("options");
     const progressText = document.getElementById("progressText");
     const resultDiv = document.getElementById("result");
     const card = document.getElementById("quizCard");
-
     function showQuestion(index) {
       questionText.innerText = questions[index];
       progressText.innerText = `第 ${index + 1} / ${questions.length} 題`;
@@ -233,7 +220,6 @@
         optionsDiv.appendChild(label);
       });
     }
-
     function nextQuestion() {
       const selected = document.querySelector('input[name="q"]:checked');
       if (!selected) {
@@ -249,7 +235,6 @@
         showResult();
       }
     }
-
     function showResult() {
       card.style.display = "none";
       const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
@@ -259,7 +244,6 @@
       sorted.forEach(([key]) => finalOils.push(...oilMapping[key].slice(0, 2)));
       const uniqueOils = [...new Set(finalOils)].slice(0, 6);
       const descriptions = uniqueOils.map(oil => `<li><strong>${oil}</strong>：${oilDescriptions[oil]}</li>`).join("");
-
       resultDiv.innerHTML = `
         <div class="card">
           <h2>你的專屬香氣組合</h2>
@@ -269,7 +253,6 @@
       `;
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
     showQuestion(current);
   </script>
 </body>
