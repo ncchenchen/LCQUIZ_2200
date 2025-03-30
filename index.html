@@ -10,7 +10,9 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
       font-family: 'Noto Sans TC', sans-serif;
       background-color: #F8F5F0;
       color: #333;
@@ -19,9 +21,6 @@
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
     }
     header {
       text-align: center;
@@ -37,15 +36,17 @@
       color: #333;
       margin: 0;
     }
+    main {
+      flex: 1;
+    }
     .card {
       max-width: 600px;
-      margin: 40px auto 60px;
+      width: 100%;
+      margin: 40px auto;
       background-color: #ffffffcc;
       border-radius: 16px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       padding: 24px;
-      box-sizing: border-box;
-      flex-shrink: 0;
     }
     .question-text {
       font-weight: 600;
@@ -92,12 +93,11 @@
     }
     #result {
       max-width: 600px;
-      margin: 40px auto 80px;
+      margin: 40px auto;
       background-color: #ffffffee;
       border-radius: 16px;
       padding: 24px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      flex-shrink: 0;
     }
     #result h2 {
       font-size: 20px;
@@ -135,14 +135,16 @@
     <h1>天然精油心理測驗</h1>
   </header>
 
-  <div class="card" id="quizCard">
-    <div class="progress" id="progressText">第 1 / 10 題</div>
-    <div class="question-text" id="questionText"></div>
-    <div id="options"></div>
-    <button id="nextBtn" onclick="nextQuestion()">下一題</button>
-  </div>
+  <main>
+    <div class="card" id="quizCard">
+      <div class="progress" id="progressText">第 1 / 10 題</div>
+      <div class="question-text" id="questionText"></div>
+      <div id="options"></div>
+      <button id="nextBtn" onclick="nextQuestion()">下一題</button>
+    </div>
 
-  <div id="result"></div>
+    <div id="result"></div>
+  </main>
 
   <footer>© La Chambre 香氛實驗室｜以氣味療癒生活每一刻</footer>
 
