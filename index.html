@@ -24,9 +24,7 @@
       background-repeat: no-repeat;
       overflow-x: hidden;
     }
-    main {
-      flex: 1;
-    }
+    main { flex: 1; }
     header {
       text-align: center;
       background-color: rgba(255, 255, 255, 0.9);
@@ -64,12 +62,8 @@
       transition: all 0.2s ease;
       display: block;
     }
-    .option:hover {
-      background-color: #e4efe8;
-    }
-    .option input {
-      margin-right: 8px;
-    }
+    .option:hover { background-color: #e4efe8; }
+    .option input { margin-right: 8px; }
     .progress {
       text-align: center;
       font-size: 14px;
@@ -88,9 +82,7 @@
       cursor: pointer;
       margin-top: 20px;
     }
-    #nextBtn:hover {
-      background-color: #8fc2a7;
-    }
+    #nextBtn:hover { background-color: #8fc2a7; }
     #result {
       max-width: 600px;
       margin: 40px auto;
@@ -103,9 +95,7 @@
       font-size: 20px;
       margin-bottom: 16px;
     }
-    #result ul {
-      padding-left: 20px;
-    }
+    #result ul { padding-left: 20px; }
     footer {
       text-align: center;
       font-size: 13px;
@@ -119,9 +109,7 @@
         margin: 24px 16px;
         padding: 20px;
       }
-      .question-text {
-        font-size: 16px;
-      }
+      .question-text { font-size: 16px; }
       #nextBtn {
         font-size: 15px;
         padding: 12px;
@@ -134,7 +122,6 @@
     <img src="logo.png" alt="La Chambre Logo">
     <h1>天然精油心理測驗</h1>
   </header>
-
   <main>
     <div class="card" id="quizCard">
       <div class="progress" id="progressText">第 1 / 10 題</div>
@@ -142,17 +129,35 @@
       <div id="options"></div>
       <button id="nextBtn" onclick="nextQuestion()">下一題</button>
     </div>
-
     <div id="result"></div>
   </main>
-
   <footer>© La Chambre 香氛實驗室｜以氣味療癒生活每一刻</footer>
-
   <script>
-    const questions = [...]; // 題目略
-    const options = [...]; // 選項略
+    const questions = [
+      "當你感到壓力大時，你最渴望哪種療癒方式？",
+      "清晨醒來，你希望迎接一天的方式是？",
+      "如果能抽空放鬆一下，你最嚮往哪種環境？",
+      "獨處時，你偏愛哪種療癒儀式？",
+      "最近的你，內心更貼近以下哪種狀態？",
+      "如果可以為生活注入一種能量，你希望是？",
+      "好友眼中的你，更像是哪種自然氣息？",
+      "當生活失衡時，你會透過什麼找回自己？",
+      "在你理想的放鬆空間中，一定會有：",
+      "你最重視培養內心的哪種品質？"
+    ];
+    const options = [
+      ["安靜地與自己獨處", "主動找朋友聊聊", "透過呼吸與放鬆活動紓壓", "到戶外轉換空間", "寫字或創作表達自己"],
+      ["緩慢展開新的一天", "充滿期待地出門活動", "給自己清楚的目標與節奏", "專注當下並留點空白", "享受靜靜不被打擾的時光"],
+      ["在自然中感受和諧與安定", "在開闊空間中感受自由與愉悅", "待在熟悉角落做自己喜歡的事", "安靜環境中獨自沈澱思緒", "探索一個陌生但有趣的地方"],
+      ["點蠟燭泡澡並深呼吸", "聽音樂或跳舞釋放情緒", "喝杯熱茶或躺下休息", "寫日記整理心情", "什麼都不做只靜靜發呆"],
+      ["覺得自己需要更多愛與接納", "覺得自己需要行動力", "覺得自己需要好好休息", "覺得自己需要安定安全感", "覺得自己需要靈感和自由"],
+      ["愛與溫柔的感受", "陽光與喜悅的能量", "清晰與覺察的狀態", "穩定踏實的內在", "自由探索與創造的空間"],
+      ["總能包容照顧他人情緒", "讓人感覺溫暖好相處", "很有原則但平和", "沉穩可靠可信賴", "活潑外向充滿點子"],
+      ["一點空間與自己的儀式感", "來自外界的互動與肯定", "好好打掃收納或安排生活感", "靜坐冥想或親近自然", "換個環境或開啟新挑戰"],
+      ["明亮柔和的光線與舒適布料", "空間中的動線與活潑感", "簡單乾淨不複雜的擺設", "大量自然元素或木頭材質", "有些神秘感與獨特氛圍"],
+      ["溫柔對待他人與自己", "總能保持樂觀", "有能力整理混亂", "越是困難越沉得住氣", "勇敢開創、敢於冒險"]
+    ];
     const valueMap = ["A", "B", "C", "D", "E"];
-
     const oilMapping = {
       A: ["玫瑰", "薰衣草", "茉莉", "橙花", "天竺葵", "依蘭"],
       B: ["甜橙", "佛手柑", "白葡萄柚", "苦橙", "萊姆", "紅橘"],
@@ -160,7 +165,6 @@
       D: ["檀香", "雪松", "絲柏", "岩蘭草", "檜木", "花梨木"],
       E: ["廣藿香", "安息香", "馬鞭草", "百里香", "肉荳蔻", "丁香"]
     };
-
     const oilDescriptions = {
       "玫瑰": "溫柔、療癒情緒與心靈的力量。",
       "薰衣草": "放鬆神經、助眠的經典選擇。",
@@ -197,15 +201,10 @@
     let current = 0;
     const selections = [];
 
-    const questionText = document.getElementById("questionText");
-    const optionsDiv = document.getElementById("options");
-    const progressText = document.getElementById("progressText");
-    const resultDiv = document.getElementById("result");
-    const card = document.getElementById("quizCard");
-
     function showQuestion(index) {
-      questionText.innerText = questions[index];
-      progressText.innerText = `第 ${index + 1} / ${questions.length} 題`;
+      document.getElementById("questionText").innerText = questions[index];
+      document.getElementById("progressText").innerText = `第 ${index + 1} / ${questions.length} 題`;
+      const optionsDiv = document.getElementById("options");
       optionsDiv.innerHTML = "";
       options[index].forEach((opt, i) => {
         const value = valueMap[i];
@@ -233,7 +232,7 @@
     }
 
     function showResult() {
-      card.style.display = "none";
+      document.getElementById("quizCard").style.display = "none";
       const counts = { A: 0, B: 0, C: 0, D: 0, E: 0 };
       selections.forEach(val => counts[val]++);
       const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 3);
@@ -241,12 +240,11 @@
       sorted.forEach(([key]) => finalOils.push(...oilMapping[key].slice(0, 2)));
       const uniqueOils = [...new Set(finalOils)].slice(0, 6);
       const descriptions = uniqueOils.map(oil => `<li><strong>${oil}</strong>：${oilDescriptions[oil]}</li>`).join("");
-
-      resultDiv.innerHTML = `
+      document.getElementById("result").innerHTML = `
         <div class="card">
           <h2>你的專屬香氣組合</h2>
           <ul>${descriptions}</ul>
-          <p style="margin-top:16px">願這些香氣陪伴你的日常，讓每一次呼吸都是一次自我療癒。</p>
+          <p style="margin-top:16px">願這些香氣陪伴你的日常，讓每一次呼吸都是一次身心療癒。</p>
         </div>
       `;
       window.scrollTo({ top: 0, behavior: 'smooth' });
